@@ -98,7 +98,10 @@ fn main() {
         }).unwrap()
     }).collect();
 
-    paths.iter().for_each(|path| println!("{:?} delta: {}", path, path.cycle_length - path.exit_offset));
+    paths.iter().for_each(|path| {
+        println!("start_node: {}, cycle_start: {}, cycle_length: {}, exit_offset: {}, delta: {}",
+                 path.start_node, path.cycle_start, path.cycle_length, path.exit_offset, path.cycle_length - path.exit_offset);
+    });
 
     let cycle_lcm = paths.iter().fold(1, |acc, path| lcm(acc, path.cycle_length));
 
