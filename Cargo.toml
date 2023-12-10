@@ -9,6 +9,14 @@ edition = "2021"
 regex = "1.10.2"
 
 [[bin]]
+name = "01-1"
+path = "src/01-1.rs"
+
+[[bin]]
+name = "01-2"
+path = "src/01-2.rs"
+
+[[bin]]
 name = "02-1"
 path = "src/02-1.rs"
 
