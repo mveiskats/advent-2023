@@ -1,7 +1,7 @@
 use std::io;
 
 fn ways(cond: &[char], dam: &[usize]) -> usize {
-    if cond.len() == 0 && dam.len() == 0 { println!("yes"); return 1 }
+    if cond.len() == 0 && dam.len() == 0 { return 1 }
     if cond.len() == 0 && dam.len() > 0 { return 0 }
     if dam.len() == 0 {
         return if cond.iter().any(|&ch| ch == '#') { 0 } else { 1 }
@@ -34,7 +34,7 @@ fn main() {
             let cond: Vec<char> = cond.chars().collect();
             let dam: Vec<usize> = dam.split(',').map(|s| s.parse::<usize>().unwrap()).collect();
 
-            ways(&cond, &dam, 0)
+            ways(&cond, &dam)
         }).sum();
 
     println!("{result}");
