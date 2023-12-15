@@ -2,7 +2,7 @@ use std::io;
 
 fn main() {
     let result: usize = io::stdin().lines().filter_map(|line| {
-        let line = line.unwrap();
+        let line = line.expect("read error");
         let (game_id, cubes) = line.split_once(": ").unwrap();
         let game_id = game_id[5..].parse::<usize>().unwrap();
 

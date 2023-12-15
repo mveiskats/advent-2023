@@ -2,10 +2,15 @@ use std::io;
 
 fn main() {
     let total: u32 = io::stdin().lines()
-        .map(|line| line.unwrap())
+        .map(|line| line.expect("read error"))
         .map(|line| {
-            let first = line.chars().find(|ch| ch.is_digit(10)).unwrap().to_digit(10).unwrap();
-            let last = line.chars().rev().find(|ch| ch.is_digit(10)).unwrap().to_digit(10).unwrap();
+            let first = line.chars()
+                .find_map(|ch| ch.to_digit(10))
+                .expect("no digits found");
+
+            let last = line.chars().rev()
+                .find_map(|ch| ch.to_digit(10))
+                .expect("no digits found");
 
             first * 10 + last
         }).sum();

@@ -3,7 +3,7 @@ use std::cmp;
 
 fn main() {
     let result: usize = io::stdin().lines().map(|line| {
-        let line = line.unwrap();
+        let line = line.expect("read error");
         let (_game_id, cubes) = line.split_once(": ").unwrap();
 
         let mut min_red = 0;
