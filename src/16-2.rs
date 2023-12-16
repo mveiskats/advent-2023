@@ -1,5 +1,6 @@
 use std::io;
 use ndarray::{ s, Array2 };
+use rayon::prelude::*;
 
 struct Board {
     tiles: Array2<char>,
@@ -76,10 +77,10 @@ fn main() {
         })
     });
 
-    let result: usize = (0..cols).map(|x| ((x, 0), (0, 1)))
-        .chain((0..cols).map(|x| ((x, rows - 1), (0, -1))))
-        .chain((0..rows).map(|y| ((0, y), (1, 0))))
-        .chain((0..rows).map(|y| ((cols - 1, y), (-1, 0))))
+    let result: usize = (0..cols).into_par_iter().map(|x| ((x, 0), (0, 1)))
+        .chain((0..cols).into_par_iter().map(|x| ((x, rows - 1), (0, -1))))
+        .chain((0..rows).into_par_iter().map(|y| ((0, y), (1, 0))))
+        .chain((0..rows).into_par_iter().map(|y| ((cols - 1, y), (-1, 0))))
         .map(|((x, y), (dx, dy))| {
             let mut board = Board {
                 tiles: tiles.clone(),
